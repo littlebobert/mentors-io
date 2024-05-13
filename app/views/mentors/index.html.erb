@@ -1,0 +1,7 @@
+<h2>All mentors</h2>
+
+<ul>
+<% @mentors.each do |mentor| %>
+<li><%= cl_image_tag mentor.photo.key %></li>
+<% end %>
+</ul>

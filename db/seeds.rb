@@ -9,13 +9,21 @@
 #   end
 require 'faker'
 
-User.destroy_all
 Mentor.destroy_all
+User.destroy_all
 
 10.times do
   user = User.create!(email: Faker::Internet.unique.email, password: "password", name: Faker::Name.unique.name)
   price = (50..1000).to_a.sample
-  Mentor.create!(user: user, specialty: Mentor::SPECIALTIES.sample, price: price)
+
+  url = "https://this-person-does-not-exist.com/new?gender=all&age=all&etnic=all"
+  json = URI.open(url).string
+  src = JSON.parse(json)['src']
+  photo_url = "https://this-person-does-not-exist.com#{src}"
+  file = URI.open(photo_url)
+  mentor = Mentor.create!(user: user, specialty: Mentor::SPECIALTIES.sample, price: price)
+  mentor.photo.attach(io: file, filename: "user.png", content_type: 'image/png')
+  puts "finished 1 mentor"
 end
 
 puts "generated #{User.count} users and #{Mentor.count} mentors"

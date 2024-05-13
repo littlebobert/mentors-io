@@ -1,4 +1,5 @@
 class Mentor < ApplicationRecord
+  has_one_attached :photo
   SPECIALTIES = ["medicine", "tech", "business", "astrology", "fashion"]
 
   belongs_to :user
