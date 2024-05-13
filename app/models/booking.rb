@@ -3,4 +3,5 @@ class Booking < ApplicationRecord
   belongs_to :mentor
 
   validates :start_time, presence: true, uniqueness: { scope: :mentor }
+  validates :status, presence: true
 end

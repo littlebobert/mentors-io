@@ -7,3 +7,15 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require 'faker'
+
+User.destroy_all
+Mentor.destroy_all
+
+10.times do
+  user = User.create!(email: Faker::Internet.unique.email, password: "password", name: Faker::Name.unique.name)
+  price = (50..1000).to_a.sample
+  Mentor.create!(user: user, specialty: Mentor::SPECIALTIES.sample, price: price)
+end
+
+puts "generated #{User.count} users and #{Mentor.count} mentors"
