@@ -1,1 +1,4 @@
-<h2>@mentor.user.name</h2>
+<h2><%= @mentor.user.name %></h2>
+<div><%= cl_image_tag @mentor.photo.key, width: 200 %></div>
+<h3>Profile:</h3>
+<%= render 'form' %>
