@@ -6,12 +6,14 @@
       <% @mentors.all.each do |mentor| %>
         <% if mentor.specialty == specialty %>
           <li>
+            <%= link_to mentor_path(mentor) do %>
             <div class="card-mentor">
               <%= cl_image_tag(mentor.photo.key) %>
               <div class="card-mentor-infos">
                 <h2><%= mentor.user.name %></h2>
               </div>
             </div>
+            <% end %>
           </li>
         <% end %>
       <% end %>
