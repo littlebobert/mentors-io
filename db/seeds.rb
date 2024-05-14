@@ -9,6 +9,7 @@
 #   end
 require 'faker'
 
+Booking.destroy_all
 Mentor.destroy_all
 User.destroy_all
 
@@ -26,4 +27,9 @@ User.destroy_all
   puts "finished 1 mentor"
 end
 
-puts "generated #{User.count} users and #{Mentor.count} mentors"
+Mentor.all.each do |mentor|
+  random_user = User.all.excluding(mentor.user).sample
+  Booking.create!(user: random_user, mentor: mentor, start_time: rand(4.weeks).seconds.ago)
+end
+
+puts "generated #{User.count} users and #{Mentor.count} mentors and #{Booking.count} bookings"
