@@ -43,9 +43,10 @@ puts "creating 3 users for our team"
   create_user_and_mentor(Mentor::SPECIALTIES.sample, email)
 end
 
+puts "creating bookings"
 Mentor.all.each do |mentor|
   random_user = User.all.excluding(mentor.user).sample
-  Booking.create!(user: random_user, mentor: mentor, start_time: rand(4.weeks).seconds.ago)
+  Booking.create!(user: random_user, mentor: mentor, start_time: rand(4.weeks).seconds.ago, status: "pending")
 end
 
 puts "done. generated #{User.count} users and #{Mentor.count} mentors and #{Booking.count} bookings"
