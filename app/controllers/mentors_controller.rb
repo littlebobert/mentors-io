@@ -5,5 +5,6 @@ class MentorsController < ApplicationController
 
   def show
     @mentor = Mentor.find(params[:id])
+    @booking = Booking.new
   end
 end
