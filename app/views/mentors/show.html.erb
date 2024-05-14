@@ -1,6 +1,7 @@
 <div class="container">
   <h2><%= @mentor.user.name %></h2>
   <div><%= cl_image_tag @mentor.photo.key, width: 200 %></div>
-  <h3>Profile:</h3>
-  <%= render 'form' %>
+  <h4><strong>Bio:</strong></h4>
+  <h4><strong>Specialty:</strong> <%= @mentor.specialty %></h4>
+  <%= render 'mentors/form' %>
 </div>
