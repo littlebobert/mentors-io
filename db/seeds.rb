@@ -15,9 +15,10 @@ Booking.destroy_all
 Mentor.destroy_all
 User.destroy_all
 
-def create_user_and_mentor(specialty, input_email)
+def create_user_and_mentor(specialty, input_email = nil, input_name = nil)
+  name = input_name.nil? ? Faker::Name.unique.name : input_name
   email = input_email.nil? ? Faker::Internet.unique.email : input_email
-  user = User.create!(email: email, password: "password", name: Faker::Name.unique.name)
+  user = User.create!(email: email, password: "password", name: name)
   price = (50..1000).to_a.sample
 
   url = "https://this-person-does-not-exist.com/new?gender=all&age=25-50&etnic=all"
@@ -34,13 +35,13 @@ mentors_per_specialty = 5
 puts "creating #{Mentor::SPECIALTIES.count * mentors_per_specialty} fake users"
 Mentor::SPECIALTIES.each do |specialty|
   mentors_per_specialty.times do
-    create_user_and_mentor(specialty, nil)
+    create_user_and_mentor(specialty)
   end
 end
 
 puts "creating 3 users for our team"
-["riyaf3105@gmail.com", "justin.garcia@gmail.com", "fangshuxing0613@gmail.com"].each do |email|
-  create_user_and_mentor(Mentor::SPECIALTIES.sample, email)
+[{ email: "riyaf3105@gmail.com", name: "Riya Fartyal" }, { email: "justin.garcia@gmail.com", name: "Justin Garcia" }, { email: "fangshuxing0613@gmail.com", name: "Shuxing Fang" } ].each do |hash|
+  create_user_and_mentor(Mentor::SPECIALTIES.sample, hash[:email], hash[:name])
 end
 
 puts "creating bookings"
