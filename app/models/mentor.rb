@@ -1,6 +1,6 @@
 class Mentor < ApplicationRecord
   has_one_attached :photo
-  SPECIALTIES = ["medicine", "tech", "business", "astrology", "fashion"]
+  SPECIALTIES = ["medicine", "tech", "business", "astrology"]
 
   belongs_to :user
   has_many :bookings, dependent: :destroy
