@@ -1,7 +1,21 @@
 <h2>All mentors</h2>
 
 <ul>
-<% @mentors.each do |mentor| %>
-<li><%= cl_image_tag mentor.photo.key %></li>
-<% end %>
+  <% Mentor::SPECIALTIES.each do |specialty| %>
+    <li><%= specialty %></li>
+    <ul class="mentors-list">
+      <% @mentors.all.each do |mentor| %>
+        <% if mentor.specialty == specialty %>
+          <li>
+            <div class="card-mentor">
+              <%= cl_image_tag(mentor.photo.key) %>
+              <div class="card-mentor-infos">
+                <h2><%= mentor.user.name %></h2>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
 </ul>
