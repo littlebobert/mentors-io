@@ -1,5 +1,16 @@
 <h1 class = "text-center">all mentors</h1>
 
+<div class = "form-size">
+<form novalidate="novalidate" class="simple_form search" action="/" accept-charset="UTF-8" method="get">
+  <div class="search-form-control form-group">
+    <input class="form-control string required" type="text" name="search[query]" id="search_query" />
+    <button name="button" type="submit" class="btn btn-flat"> search
+    </button>
+  </div>
+</form>
+</div>
+
+<br>
   <% Mentor::SPECIALTIES.each do |specialty| %>
     <h3 class = "ps-2"> <%= specialty %> </h3>
     <ul class="mentors-list">
