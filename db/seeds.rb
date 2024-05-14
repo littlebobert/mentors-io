@@ -26,9 +26,11 @@ def create_user_and_mentor(specialty, input_email = nil, input_name = nil)
   src = JSON.parse(json)['src']
   photo_url = "https://this-person-does-not-exist.com#{src}"
   file = URI.open(photo_url)
-  mentor = Mentor.create!(user: user, specialty: specialty, price: price)
+  tagline = Faker::Lorem.sentence
+  bio = Faker::Lorem.paragraphs(number: 1).join("\n\n")
+  mentor = Mentor.create!(user: user, specialty: specialty, price: price, tagline: tagline, bio: bio)
   mentor.photo.attach(io: file, filename: "user.png", content_type: 'image/png')
-  puts "finished creating a user and mentor for: #{email}"
+  puts "finished creating a user and mentor for: #{name}, #{email}"
 end
 
 mentors_per_specialty = 5
