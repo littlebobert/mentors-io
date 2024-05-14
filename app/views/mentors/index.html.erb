@@ -20,7 +20,9 @@
           <div class="card-mentor">
             <%= cl_image_tag(mentor.photo.key) %>
             <div class="card-mentor-infos">
-              <h2><%= mentor.user.name %></h2>
+              <h2 class="fs-3"><%= mentor.user.name %></h2>
+              <p class="text-muted"> $<%= mentor.price %> per hour <br>
+              <%= mentor.tagline %> </p>
             </div>
           </div>
           <% end %>
