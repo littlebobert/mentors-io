@@ -1,0 +1,6 @@
+<h2>All bookings</h2>
+<ul>
+  <% @bookings.each  do |booking| %>
+   <li><%= booking.mentor.user.name %> at <%= booking.start_time.strftime("%A, %d %b %Y %l:%M %p") %></li>
+  <% end %>
+</ul>
