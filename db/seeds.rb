@@ -16,7 +16,7 @@ User.destroy_all
   user = User.create!(email: Faker::Internet.unique.email, password: "password", name: Faker::Name.unique.name)
   price = (50..1000).to_a.sample
 
-  url = "https://this-person-does-not-exist.com/new?gender=all&age=all&etnic=all"
+  url = "https://this-person-does-not-exist.com/new?gender=all&age=25-50&etnic=all"
   json = URI.open(url).string
   src = JSON.parse(json)['src']
   photo_url = "https://this-person-does-not-exist.com#{src}"
