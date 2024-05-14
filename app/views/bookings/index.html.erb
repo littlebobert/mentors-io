@@ -1,6 +1,32 @@
-<h2>All bookings</h2>
-<ul>
-  <% @bookings.each  do |booking| %>
-   <li><%= booking.mentor.user.name %> at <%= booking.start_time.strftime("%A, %d %b %Y %l:%M %p") %></li>
-  <% end %>
+<ul class="list-inline tabs-underlined">
+  <li>
+    <a href="#" class="tab-underlined active">All</a>
+  </li>
+  <li>
+    <a href="#" class="tab-underlined">Upcoming</a>
+  </li>
+  <li>
+    <a href="#" class="tab-underlined">Completed</a>
+  </li>
+  <li>
+    <a href="#" class="tab-underlined">Canceled</a>
+  </li>
 </ul>
+
+
+  <% @bookings.each  do |booking| %>
+
+   <div class="booking-card">
+  <%= cl_image_tag(booking.mentor.photo.key, class:"avatar-large") %>
+  <div class="booking-card-content">
+    <p><small><%= booking.start_time.strftime("%A, %d %b %Y %l:%M %p") %></small></p>
+    <p><%= booking.mentor.user.name %></p>
+    <p><%= booking.status %></p>
+  </div>
+
+  <div class="booking-card-actions">
+    <a href="#">Edit <i class="fas fa-pencil-alt"></i></a>
+    <a href="#">Cancel <i class="far fa-trash-alt"></i></a>
+  </div>
+</div>
+  <% end %>
