@@ -15,20 +15,26 @@ Booking.destroy_all
 Mentor.destroy_all
 User.destroy_all
 
-def create_user_and_mentor(specialty, input_email = nil, input_name = nil)
+def create_user_and_mentor(specialty, input_email = nil, input_name = nil, input_photo_url = nil)
   name = input_name.nil? ? Faker::Name.unique.name : input_name
   email = input_email.nil? ? Faker::Internet.unique.email : input_email
   user = User.create!(email: email, password: "password", name: name)
   price = (50..1000).to_a.sample
 
-  url = "https://this-person-does-not-exist.com/new?gender=all&age=25-50&etnic=all"
-  json = URI.open(url).string
-  src = JSON.parse(json)['src']
-  photo_url = "https://this-person-does-not-exist.com#{src}"
+  if input_photo_url.nil?
+    url = "https://this-person-does-not-exist.com/new?gender=all&age=25-50&etnic=all"
+    json = URI.open(url).string
+    src = JSON.parse(json)['src']
+    photo_url = "https://this-person-does-not-exist.com#{src}"
+  else
+    photo_url = input_photo_url
+  end
   file = URI.open(photo_url)
-  mentor = Mentor.create!(user: user, specialty: specialty, price: price)
+  tagline = Faker::Lorem.sentence
+  bio = Faker::Lorem.paragraphs(number: 1).join("\n\n")
+  mentor = Mentor.create!(user: user, specialty: specialty, price: price, tagline: tagline, bio: bio)
   mentor.photo.attach(io: file, filename: "user.png", content_type: 'image/png')
-  puts "finished creating a user and mentor for: #{email}"
+  puts "finished creating a user and mentor for: #{name}, #{email}"
 end
 
 mentors_per_specialty = 5
@@ -40,8 +46,12 @@ Mentor::SPECIALTIES.each do |specialty|
 end
 
 puts "creating 3 users for our team"
-[{ email: "riyaf3105@gmail.com", name: "Riya Fartyal" }, { email: "justin.garcia@gmail.com", name: "Justin Garcia" }, { email: "fangshuxing0613@gmail.com", name: "Shuxing Fang" } ].each do |hash|
-  create_user_and_mentor(Mentor::SPECIALTIES.sample, hash[:email], hash[:name])
+[
+  { email: "riyaf3105@gmail.com", name: "Riya Fartyal", photo_url: "https://avatars.githubusercontent.com/u/83643548?v=4" },
+  { email: "justin.garcia@gmail.com", name: "Justin Garcia", photo_url: "https://avatars.githubusercontent.com/u/8378384" },
+  { email: "fangshuxing0613@gmail.com", name: "Shuxing Fang", photo_url: "https://avatars.githubusercontent.com/u/151457729?v=4" }
+].each do |hash|
+  create_user_and_mentor(Mentor::SPECIALTIES.sample, hash[:email], hash[:name], hash[:photo_url])
 end
 
 puts "creating bookings"
