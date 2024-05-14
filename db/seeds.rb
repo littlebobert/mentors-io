@@ -31,7 +31,7 @@ def create_user_and_mentor(specialty, input_email = nil, input_name = nil, input
   end
   file = URI.open(photo_url)
   tagline = Faker::Lorem.sentence
-  bio = Faker::Lorem.paragraphs(number: 1).join("\n\n")
+  bio = Faker::Lorem.paragraphs(number: 5).join("\n\n")
   mentor = Mentor.create!(user: user, specialty: specialty, price: price, tagline: tagline, bio: bio)
   mentor.photo.attach(io: file, filename: "user.png", content_type: 'image/png')
   puts "finished creating a user and mentor for: #{name}, #{email}"
