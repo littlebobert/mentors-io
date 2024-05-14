@@ -1,8 +1,7 @@
-<h2>All mentors</h2>
+<h1 class = "text-center">all mentors</h1>
 
-<ul>
   <% Mentor::SPECIALTIES.each do |specialty| %>
-    <li><%= specialty %></li>
+    <h3 class = "ps-2"> <%= specialty %> </h3>
     <ul class="mentors-list">
       <% @mentors.all.each do |mentor| %>
         <% if mentor.specialty == specialty %>
@@ -18,4 +17,3 @@
       <% end %>
     </ul>
   <% end %>
-</ul>
