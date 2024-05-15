@@ -12,6 +12,7 @@
   </head>
 
   <body>
+    <%= render "shared/flashes" %>
     <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
       <div class="container-fluid">
         <%= link_to 'mentors.io', root_path, class: 'navbar-brand' %>
@@ -40,9 +41,6 @@
     </div>
   </div>
 </div>
-
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
   <%= yield %>
 
   </body>
