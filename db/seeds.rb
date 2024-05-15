@@ -22,7 +22,7 @@ def create_user_and_mentor(specialty, input_email = nil, input_name = nil, input
   price = (50..1000).to_a.sample
 
   if input_photo_url.nil?
-    url = "https://this-person-does-not-exist.com/new?gender=all&age=25-50&etnic=all"
+    url = "https://this-person-does-not-exist.com/new?gender=all&age=40&etnic=all"
     json = URI.open(url).string
     src = JSON.parse(json)['src']
     photo_url = "https://this-person-does-not-exist.com#{src}"
@@ -37,7 +37,7 @@ def create_user_and_mentor(specialty, input_email = nil, input_name = nil, input
   puts "finished creating a user and mentor for: #{name}, #{email}"
 end
 
-mentors_per_specialty = 5
+mentors_per_specialty = 8
 puts "creating #{Mentor::SPECIALTIES.count * mentors_per_specialty} fake users"
 Mentor::SPECIALTIES.each do |specialty|
   mentors_per_specialty.times do
@@ -57,7 +57,9 @@ end
 puts "creating bookings"
 Mentor.all.each do |mentor|
   random_user = User.all.excluding(mentor.user).sample
-  Booking.create!(user: random_user, mentor: mentor, start_time: rand(4.weeks).seconds.ago, status: "pending")
+  10.times do
+    Booking.create!(user: random_user, mentor: mentor, start_time: rand(4.weeks).seconds.ago, status: BOOKING::STATUSES.sample)
+  end
 end
 
 puts "done. generated #{User.count} users and #{Mentor.count} mentors and #{Booking.count} bookings"

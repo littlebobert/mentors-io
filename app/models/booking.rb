@@ -4,4 +4,6 @@ class Booking < ApplicationRecord
 
   validates :start_time, presence: true, uniqueness: { scope: :mentor }
   validates :status, presence: true
+
+  STATUSES = ["pending", "upcoming", "completed", "canceled"]
 end
