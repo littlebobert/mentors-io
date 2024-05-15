@@ -1,4 +1,4 @@
-<h1 class = "text-center">all mentors</h1>
+<h1 class = "text-center">Choose an expert</h1>
 
 <div class = "form-size">
 <form novalidate="novalidate" class="simple_form search" action="/" accept-charset="UTF-8" method="get">
@@ -9,7 +9,21 @@
   </div>
 </form>
 </div>
+
+<ul class="list-inline tabs-underlined mt-3">
+  <li>
+    <%= link_to "All", mentors_path, class: "tab-underlined #{params[:specialty].nil? ? "active" : ""}" %>
+  </li>
+  <% Mentor::SPECIALTIES.each do |specialty| %>
+    <%= link_to specialty.capitalize, mentors_path(:specialty => specialty), class: "tab-underlined #{params[:specialty] == specialty ? "active" : ""}" %>
+  <% end %>
+</ul>
+
+
+
+
 <% Mentor::SPECIALTIES.each do |specialty| %>
+  <% next if specialty != params[:specialty] && params[:specialty]%>
   <h3 class = "ps-2"> <%= specialty %> </h3>
   <ul class="mentors-list">
     <% @mentors.all.each do |mentor| %>
