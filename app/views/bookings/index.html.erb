@@ -1,20 +1,20 @@
 <ul class="list-inline tabs-underlined">
   <li>
-    <a href="#" class="tab-underlined active">All</a>
+    <%= link_to "All", bookings_path, class: "tab-underlined #{params[:status].nil? ? "active" : ""}" %>
   </li>
   <li>
-    <a href="#" class="tab-underlined">Upcoming</a>
+    <%= link_to "Upcoming", bookings_path(:status => "upcoming"), class: "tab-underlined #{params[:status] == "upcoming" ? "active" : ""}" %>
   </li>
   <li>
-    <a href="#" class="tab-underlined">Completed</a>
+    <%= link_to "Completed", bookings_path(:status => "completed"), class: "tab-underlined #{params[:status] == "completed" ? "active" : ""}" %>
   </li>
   <li>
-    <a href="#" class="tab-underlined">Canceled</a>
+    <%= link_to "Canceled", bookings_path(:status => "canceled"), class: "tab-underlined #{params[:status] == "canceled" ? "active" : ""}" %>
   </li>
 </ul>
 
 
-  <% @bookings.each  do |booking| %>
+  <% (params[:status].nil? ? @bookings : @bookings.where(status: params[:status])).each  do |booking| %>
 
    <div class="booking-card">
   <%= cl_image_tag(booking.mentor.photo.key, class:"avatar-large") %>
