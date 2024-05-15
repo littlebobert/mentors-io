@@ -22,7 +22,7 @@ def create_user_and_mentor(specialty, input_email = nil, input_name = nil, input
   price = (50..1000).to_a.sample
 
   if input_photo_url.nil?
-    url = "https://this-person-does-not-exist.com/new?gender=all&age=40&etnic=all"
+    url = "https://this-person-does-not-exist.com/new?gender=all&age=35-50&etnic=all"
     json = URI.open(url).string
     src = JSON.parse(json)['src']
     photo_url = "https://this-person-does-not-exist.com#{src}"
