@@ -13,10 +13,14 @@ class BookingsController < ApplicationController
     @bookings = Booking.where(user: current_user)
   end
 
-  def destroy
+  def update
     @booking = Booking.find(params[:id])
-    @booking.destroy
-    redirect_to bookings_path
+    @booking.update(status: params["status"])
+    if @booking.save
+      redirect_to bookings_path
+    else
+      render "bookings/index", status: :unprocessable_entity
+    end
   end
 
   private
