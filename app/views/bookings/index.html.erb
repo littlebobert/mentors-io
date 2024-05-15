@@ -3,6 +3,9 @@
     <%= link_to "All", bookings_path, class: "tab-underlined #{params[:status].nil? ? "active" : ""}" %>
   </li>
   <li>
+    <%= link_to "Pending", bookings_path(:status => "pending"), class: "tab-underlined #{params[:status] == "pending" ? "active" : ""}" %>
+  </li>
+  <li>
     <%= link_to "Upcoming", bookings_path(:status => "upcoming"), class: "tab-underlined #{params[:status] == "upcoming" ? "active" : ""}" %>
   </li>
   <li>
