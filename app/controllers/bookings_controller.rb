@@ -14,7 +14,7 @@ class BookingsController < ApplicationController
   end
 
   def index
-    @bookings = Booking.where(user: current_user)
+    @bookings = Booking.where(user: current_user).order(start_time: :asc)
   end
 
   def update
