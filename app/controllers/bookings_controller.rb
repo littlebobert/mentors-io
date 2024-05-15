@@ -1,5 +1,9 @@
 class BookingsController < ApplicationController
   def create
+    unless user_signed_in?
+      redirect_to new_user_session_path
+      return
+    end
     @mentor = Mentor.find(params[:mentor_id])
     @booking = Booking.new(strong_params)
     if @booking.save
