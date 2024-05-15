@@ -1,4 +1,4 @@
-<h1 class = "text-center">all mentors</h1>
+<h1 class = "text-center mt-3">all mentors</h1>
 
 <div class = "form-size">
 <form novalidate="novalidate" class="simple_form search" action="/" accept-charset="UTF-8" method="get">
@@ -10,7 +10,7 @@
 </form>
 </div>
 <% Mentor::SPECIALTIES.each do |specialty| %>
-  <h3 class = "ps-2"> <%= specialty %> </h3>
+  <h3 class = "ps-2"> <%= specialty.capitalize %> </h3>
   <ul class="mentors-list">
     <% @mentors.all.each do |mentor| %>
       <% if mentor.specialty == specialty %>
@@ -19,9 +19,9 @@
           <div class="card-mentor">
             <%= cl_image_tag(mentor.photo.key) %>
             <div class="card-mentor-infos">
-              <h5 class="fs-6"><%= mentor.user.name %></h5>
-              <p class="text-muted h6 small"> $<%= mentor.price %> per hour <br>
-              <%= mentor.tagline %> </p>
+              <h5 class="fs-6"><strong><%= mentor.user.name %></strong></h5>
+              <p class="h6 small"><strong>$<%= mentor.price %> per hour</strong></p>
+              <p><%= mentor.tagline %></p>
             </div>
           </div>
           <% end %>
