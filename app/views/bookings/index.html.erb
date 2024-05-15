@@ -24,7 +24,8 @@
   <div class="booking-card-content">
     <p><small><%= booking.start_time.strftime("%A, %d %b %Y %l:%M %p") %></small></p>
     <p><%= booking.mentor.user.name %></p>
-    <p><%= booking.status %></p>
+    <p> <i class="fa-regular fa-envelope" style="color: #000000;"></i> <%= booking.mentor.user.email %></p>
+    <p> <i class="fa-regular fa-clock" style="color: #000000;"></i> <%= booking.status %></p>
   </div>
 
   <div class="booking-card-actions">
