@@ -46,19 +46,22 @@ Mentor::SPECIALTIES.each do |specialty|
 end
 
 puts "creating 3 users for our team"
-[
+team_users = [
   { email: "riyaf3105@gmail.com", name: "Riya Fartyal", photo_url: "https://avatars.githubusercontent.com/u/83643548?v=4" },
   { email: "justin.garcia@gmail.com", name: "Justin Garcia", photo_url: "https://avatars.githubusercontent.com/u/8378384" },
   { email: "fangshuxing0613@gmail.com", name: "Shuxing Fang", photo_url: "https://avatars.githubusercontent.com/u/151457729?v=4" }
-].each do |hash|
+]
+team_users.each do |hash|
   create_user_and_mentor(Mentor::SPECIALTIES.sample, hash[:email], hash[:name], hash[:photo_url])
 end
 
 puts "creating bookings"
 Mentor.all.each do |mentor|
-  random_user = User.all.excluding(mentor.user).sample
-  10.times do
-    Booking.create!(user: random_user, mentor: mentor, start_time: rand(4.weeks).seconds.ago, status: BOOKING::STATUSES.sample)
+  team_users.each do |team_user_hash|
+    team_user = User.where(email: team_user_hash[:email]).first
+    next if team_user == mentor.user
+
+    Booking.create!(user: team_user, mentor: mentor, start_time: rand(4.weeks).seconds.ago, status: Booking::STATUSES.sample)
   end
 end
 
