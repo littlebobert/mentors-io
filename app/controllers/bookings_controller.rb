@@ -3,7 +3,7 @@ class BookingsController < ApplicationController
     @mentor = Mentor.find(params[:mentor_id])
     @booking = Booking.new(strong_params)
     if @booking.save
-      redirect_to mentor_path(@mentor)
+      redirect_to bookings_path
     else
       render 'mentors/show', status: :unprocessable_entity
     end
@@ -11,6 +11,16 @@ class BookingsController < ApplicationController
 
   def index
     @bookings = Booking.where(user: current_user)
+  end
+
+  def update
+    @booking = Booking.find(params[:id])
+    @booking.update(status: params["status"])
+    if @booking.save
+      redirect_to bookings_path
+    else
+      render "bookings/index", status: :unprocessable_entity
+    end
   end
 
   private

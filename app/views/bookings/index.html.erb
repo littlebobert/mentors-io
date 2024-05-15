@@ -25,8 +25,9 @@
   </div>
 
   <div class="booking-card-actions">
-    <a href="#">Edit <i class="fas fa-pencil-alt"></i></a>
-    <a href="#">Cancel <i class="far fa-trash-alt"></i></a>
+    <%= link_to booking_path(booking, :status => "canceled"), method: :patch, data: { turbo_method: "patch", turbo_confirm: "Are you sure?" } do %>
+      Cancel <i class="far fa-trash-alt"></i>
+    <% end %>
   </div>
 </div>
   <% end %>
