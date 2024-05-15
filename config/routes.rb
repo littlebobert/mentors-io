@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   resources :bookings, only: [:update, :index]
 
+  delete "/bookings/:id", to: "bookings#destroy", as: :bookmark
+
   namespace :mentor do
     resources :bookings, only: :index
   end
