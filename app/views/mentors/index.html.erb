@@ -15,13 +15,13 @@
   <ul class="mentors-list">
     <% @mentors.all.each do |mentor| %>
       <% if mentor.specialty == specialty %>
-        <li>
+        <li class="card-main">
           <%= link_to mentor_path(mentor) do %>
           <div class="card-mentor">
             <%= cl_image_tag(mentor.photo.key) %>
             <div class="card-mentor-infos">
-              <h2 class="fs-3"><%= mentor.user.name %></h2>
-              <p class="text-muted"> $<%= mentor.price %> per hour <br>
+              <h5 class="fs-6"><%= mentor.user.name %></h5>
+              <p class="text-muted h6 small"> $<%= mentor.price %> per hour <br>
               <%= mentor.tagline %> </p>
             </div>
           </div>
