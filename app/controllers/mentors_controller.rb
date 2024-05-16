@@ -1,10 +1,8 @@
 class MentorsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
-    @mentors = Mentor.all
     if params[:query].present?
-      @mentors = Mentor.joins(:user)
-        .where("name ILIKE ?", "%#{params[:query]}%")
+      @mentors = Mentor.search_by_name_and_bio_and_tagline(params[:query])
     else
       @mentors = Mentor.all
     end
