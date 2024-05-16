@@ -72,12 +72,14 @@ team_users.each do |team_user_hash|
 
     Booking.create!(user: team_user, mentor: mentor, start_time: rand(4.weeks).seconds.ago, status: Booking::STATUSES.sample)
   end
-  # make 7 bookings where team_user is the mentor:
-  7.times do
-    user = User.all.sample
-    next if team_user == user
+  # make bookings where team_user is the mentor:
+  Booking::STATUSES.each do |status|
+    3.times do
+      user = User.all.sample
+      next if team_user == user
 
-    Booking.create!(user: user, mentor: Mentor.where(user: team_user).first, start_time: rand(4.weeks).seconds.ago, status: Booking::STATUSES.sample)
+      Booking.create!(user: user, mentor: Mentor.where(user: team_user).first, start_time: rand(4.weeks).seconds.ago, status: status)
+    end
   end
 end
 
