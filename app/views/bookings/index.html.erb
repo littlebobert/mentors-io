@@ -29,8 +29,10 @@
   </div>
 
   <div class="booking-card-actions">
-    <%= link_to booking_path(booking, :status => "canceled"), method: :patch, data: { turbo_method: "patch", turbo_confirm: "Are you sure?" } do %>
-      Cancel <i class="far fa-trash-alt"></i>
+    <% if booking.status != "canceled" %>
+      <%= link_to booking_path(booking, :status => "canceled"), method: :patch, data: { turbo_method: "patch", turbo_confirm: "Are you sure?" } do %>
+        Cancel <i class="far fa-trash-alt"></i>
+      <% end %>
     <% end %>
   </div>
 </div>

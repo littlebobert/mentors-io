@@ -25,16 +25,15 @@
         <% if user_signed_in? %>
           <% if current_user.a_mentor? %>
             <li class="nav-item active">
-              <%= link_to 'Requests', mentor_mentor_bookings_path, class: 'nav-link' %>
+              <%= link_to 'Incoming Requests', mentor_mentor_bookings_path, class: "nav-link #{current_page?(mentor_mentor_bookings_path) ? "active" : ""}" %>
             </li>
-          <% end %>
-          <% if Mentor.where(user: current_user).first.nil? %>
+          <% else %>
             <li class="nav-item active">
-            <%= link_to 'Become a mentor', new_mentor_path, class: 'nav-link' %>
+              <%= link_to 'Become a mentor', new_mentor_path, class: "nav-link" %>
             </li>
           <% end %>
           <li class="nav-item active">
-          <%= link_to 'Bookings', bookings_path, class: 'nav-link' %>
+          <%= link_to 'Outgoing', bookings_path, class: "nav-link #{current_page?(bookings_path) ? "active" : ""}" %>
           </li>
           <li class="nav-item active">
           <%= link_to 'Log out',  destroy_user_session_path, class: 'nav-link', data: {turbo_method: :delete} %>
