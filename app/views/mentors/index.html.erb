@@ -39,6 +39,11 @@
                   <h5 class="fs-6"><strong><%= mentor.user.name %></strong></h5>
                   <p class="h6 small"><strong>$<%= mentor.price %> per hour</strong></p>
                   <p><%= mentor.tagline %></p>
+                    <div class="card-tags">
+                      <% if Booking.where(user: current_user, mentor: mentor).first.present? %>
+                        <span> <i class="fa-solid fa-calendar-check" style="color: #60c1e1;"></i> </span>
+                      <% end %>
+                    </div>
                 </div>
               </div>
             <% end %>
