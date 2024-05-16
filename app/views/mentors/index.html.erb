@@ -1,15 +1,16 @@
 <h1 class = "text-center mt-3">Choose an expert</h1>
-
-<div class = "form-size">
-<form novalidate="novalidate" class="simple_form search" action="/" accept-charset="UTF-8" method="get">
-  <div class="search-form-control form-group">
-    <input class="form-control string required" type="text" name="search[query]" id="search_query" />
-    <button name="button" type="submit" class="btn btn-flat"> search
-    </button>
+<div class="search-form-control form-group">
+  <div class="form-group form-inline">
+    <%= form_with url: mentors_path, method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            placeholder: "Find a mentor"
+        %>
+      <%= submit_tag "Search", name: "", class: "btn btn-flat" %>
+    <% end %>
   </div>
-</form>
 </div>
-
 <ul class="list-inline tabs-underlined mt-3">
   <li>
     <%= link_to "All", mentors_path, class: "tab-underlined #{params[:specialty].nil? ? "active" : ""}" %>
@@ -18,29 +19,30 @@
     <%= link_to specialty.capitalize, mentors_path(:specialty => specialty), class: "tab-underlined #{params[:specialty] == specialty ? "active" : ""}" %>
   <% end %>
 </ul>
-
-
-
-
-<% Mentor::SPECIALTIES.each do |specialty| %>
-  <% next if specialty != params[:specialty] && params[:specialty]%>
-  <h3 class = "ps-2"> <%= specialty.capitalize %> </h3>
-  <ul class="mentors-list">
-    <% @mentors.all.each do |mentor| %>
-      <% if mentor.specialty == specialty %>
-        <li class="card-main">
-          <%= link_to mentor_path(mentor) do %>
-          <div class="card-mentor">
-            <%= cl_image_tag(mentor.photo.key) %>
-            <div class="card-mentor-infos">
-              <h5 class="fs-6"><strong><%= mentor.user.name %></strong></h5>
-              <p class="h6 small"><strong>$<%= mentor.price %> per hour</strong></p>
-              <p><%= mentor.tagline %></p>
-            </div>
-          </div>
-          <% end %>
-        </li>
+<% if @mentors.empty? %>
+  <p class="text-center"> Nothing available </p>
+<% else %>
+  <% Mentor::SPECIALTIES.each do |specialty| %>
+    <% next if @mentors.where(specialty: specialty).empty? %>
+    <% next if specialty != params[:specialty] && params[:specialty]%>
+    <h3 class = "ps-2"> <%= specialty.capitalize %> </h3>
+    <ul class="mentors-list">
+      <% @mentors.all.each do |mentor| %>
+        <% if mentor.specialty == specialty %>
+          <li class="card-main">
+            <%= link_to mentor_path(mentor) do %>
+              <div class="card-mentor">
+                <%= cl_image_tag(mentor.photo.key) %>
+                <div class="card-mentor-infos">
+                  <h5 class="fs-6"><strong><%= mentor.user.name %></strong></h5>
+                  <p class="h6 small"><strong>$<%= mentor.price %> per hour</strong></p>
+                  <p><%= mentor.tagline %></p>
+                </div>
+              </div>
+            <% end %>
+          </li>
+        <% end %>
       <% end %>
-    <% end %>
-  </ul>
+    </ul>
+  <% end %>
 <% end %>
