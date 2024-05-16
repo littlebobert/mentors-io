@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   namespace :mentor do
     resources :bookings, only: :index, as: :mentor_bookings
+    resources :bookings, only: :update, as: :mentor_booking
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
