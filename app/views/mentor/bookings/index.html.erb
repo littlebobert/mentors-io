@@ -27,7 +27,7 @@
     </div>
     <div class="booking-card-actions">
       <% if booking.status == "pending" %>
-      <%= link_to booking_path(booking, :status => "upcoming", :redirect_to => "mentor/bookings"), method: :patch, data: { turbo_method: "patch", turbo_confirm: "Are you sure?" } do %>
+        <%= link_to booking_path(booking, :status => "upcoming", :redirect_to => "mentor/bookings"), method: :patch, data: { turbo_method: "patch" } do %>
           Accept <i class="fa-solid fa-circle-check"></i>
         <% end %>
         <%= link_to booking_path(booking, :status => "canceled", :redirect_to => "mentor/bookings"), method: :patch, data: { turbo_method: "patch", turbo_confirm: "Are you sure?" } do %>
