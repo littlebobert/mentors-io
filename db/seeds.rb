@@ -37,6 +37,10 @@ def create_user_and_mentor(specialty, input_email = nil, input_name = nil, input
   puts "finished creating a user and mentor for: #{name}, #{email}"
 end
 
+def create_user(email, name)
+  user = User.create!(email: email, password: "password", name: name)
+end
+
 mentors_per_specialty = 8
 puts "creating #{Mentor::SPECIALTIES.count * mentors_per_specialty} fake users"
 Mentor::SPECIALTIES.each do |specialty|
@@ -51,17 +55,31 @@ team_users = [
   { email: "justin.garcia@gmail.com", name: "Justin Garcia", photo_url: "https://avatars.githubusercontent.com/u/8378384" },
   { email: "fangshuxing0613@gmail.com", name: "Shuxing Fang", photo_url: "https://avatars.githubusercontent.com/u/151457729?v=4" }
 ]
+standard_user = { email: "standard-user@gmail.com", name: "John Smith" }
 team_users.each do |hash|
   create_user_and_mentor(Mentor::SPECIALTIES.sample, hash[:email], hash[:name], hash[:photo_url])
 end
 
+create_user(standard_user[:email], standard_user[:name])
+
 puts "creating bookings"
-Mentor.all.each do |mentor|
-  team_users.each do |team_user_hash|
-    team_user = User.where(email: team_user_hash[:email]).first
+team_users.each do |team_user_hash|
+  team_user = User.where(email: team_user_hash[:email]).first
+  # make 7 bookings where team_user is the mentee:
+  7.times do
+    mentor = Mentor.all.sample
     next if team_user == mentor.user
 
     Booking.create!(user: team_user, mentor: mentor, start_time: rand(4.weeks).seconds.ago, status: Booking::STATUSES.sample)
+  end
+  # make bookings where team_user is the mentor:
+  Booking::STATUSES.each do |status|
+    3.times do
+      user = User.all.sample
+      next if team_user == user
+
+      Booking.create!(user: user, mentor: Mentor.where(user: team_user).first, start_time: rand(4.weeks).seconds.ago, status: status)
+    end
   end
 end
 

@@ -1,6 +1,39 @@
-<h2>All bookings for <%= @mentor.user.name %></h2>
-<ul>
-  <%= @bookings.each do |booking| %>
-    <li>with <%= booking.user.name %> at <%= booking.start_time %></li>
-  <% end %>
+<ul class="list-inline tabs-underlined mt-3">
+  <li>
+    <%= link_to "All", mentor_mentor_bookings_path, class: "tab-underlined #{params[:status].nil? ? "active" : ""}" %>
+  </li>
+  <li>
+    <%= link_to "Pending", mentor_mentor_bookings_path(:status => "pending"), class: "tab-underlined #{params[:status] == "pending" ? "active" : ""}" %>
+  </li>
+  <li>
+    <%= link_to "Upcoming", mentor_mentor_bookings_path(:status => "upcoming"), class: "tab-underlined #{params[:status] == "upcoming" ? "active" : ""}" %>
+  </li>
+  <li>
+    <%= link_to "Completed", mentor_mentor_bookings_path(:status => "completed"), class: "tab-underlined #{params[:status] == "completed" ? "active" : ""}" %>
+  </li>
+  <li>
+    <%= link_to "Canceled", mentor_mentor_bookings_path(:status => "canceled"), class: "tab-underlined #{params[:status] == "canceled" ? "active" : ""}" %>
+  </li>
 </ul>
+
+
+<% (params[:status].nil? ? @bookings : @bookings.where(status: params[:status])).each  do |booking| %>
+  <div class="booking-card">
+    <div class="booking-card-content">
+      <p><small><%= booking.start_time.strftime("%A, %d %b %Y %l:%M %p") %></small></p>
+      <p> <b> <%= booking.user.name %> </b> </p>
+      <p> <i class="fa-regular fa-envelope" style="color: #000000;"></i> <%= booking.user.email %></p>
+      <p> <i class="fa-regular fa-clock" style="color: #000000;"></i> <%= booking.status %></p>
+    </div>
+    <div class="booking-card-actions">
+      <% if booking.status == "pending" %>
+      <%= link_to booking_path(booking, :status => "upcoming", :redirect_to => "mentor/bookings"), method: :patch, data: { turbo_method: "patch", turbo_confirm: "Are you sure?" } do %>
+          Accept <i class="fa-solid fa-circle-check"></i>
+        <% end %>
+        <%= link_to booking_path(booking, :status => "canceled", :redirect_to => "mentor/bookings"), method: :patch, data: { turbo_method: "patch", turbo_confirm: "Are you sure?" } do %>
+          Reject <i class="fa-solid fa-ban"></i>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

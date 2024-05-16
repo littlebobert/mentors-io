@@ -1,7 +1,6 @@
 class Mentor::BookingsController < ApplicationController
   def index
-    @bookings = Booking.all
-    @mentor = current_user.mentor
-    raise
+    @mentor = Mentor.where(user: current_user).first
+    @bookings = Booking.where(mentor: @mentor)
   end
 end
