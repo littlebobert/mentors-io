@@ -28,6 +28,11 @@
               <%= link_to 'Requests', mentor_mentor_bookings_path, class: 'nav-link' %>
             </li>
           <% end %>
+          <% if Mentor.where(user: current_user).first.nil? %>
+            <li class="nav-item active">
+            <%= link_to 'Become a mentor', new_mentor_path, class: 'nav-link' %>
+            </li>
+          <% end %>
           <li class="nav-item active">
           <%= link_to 'Bookings', bookings_path, class: 'nav-link' %>
           </li>
