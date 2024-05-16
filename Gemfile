@@ -79,3 +79,4 @@ gem "devise"
 gem "faker"
 gem "cloudinary"
 gem 'http'
+gem "pg_search"
