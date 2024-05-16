@@ -24,7 +24,7 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <% if !Mentor.where(user: current_user).first.nil? %>
+            <% if current_user.a_mentor? %>
               <%= link_to 'Requests', mentor_mentor_bookings_path, class: 'nav-link' %>
             <% end %>
           </li>
