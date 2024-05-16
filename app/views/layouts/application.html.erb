@@ -23,6 +23,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
+          <% if Mentor.where(user: current_user).first.nil? %>
+            <li class="nav-item active">
+            <%= link_to 'Become a mentor', new_mentor_path, class: 'nav-link' %>
+            </li>
+          <% end %>
           <li class="nav-item active">
           <%= link_to 'Bookings', bookings_path, class: 'nav-link' %>
           </li>
