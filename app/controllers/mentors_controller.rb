@@ -24,7 +24,7 @@ class MentorsController < ApplicationController
     @mentor.user = current_user
 
     if @mentor.save
-      redirect_to @mentor, notice: "mentor was successfully created."
+      redirect_to @mentor, notice: "Welcome to mentors.io!"
     else
       render :new, status: :unprocessable_entity
     end
