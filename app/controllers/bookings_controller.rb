@@ -7,7 +7,7 @@ class BookingsController < ApplicationController
     @mentor = Mentor.find(params[:mentor_id])
     @booking = Booking.new(strong_params)
     if @booking.save
-      redirect_to bookings_path
+      redirect_to bookings_path, notice: "Your booking was created. Now #{@mentor.user.name} needs to confirm it."
     else
       render 'mentors/show', status: :unprocessable_entity
     end
