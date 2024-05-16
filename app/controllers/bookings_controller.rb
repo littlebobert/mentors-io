@@ -21,7 +21,7 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     @booking.update(status: params["status"])
     if @booking.save
-      redirect_to bookings_path
+      redirect_to params[:redirect_to] == "mentor/bookings" ? mentor_mentor_bookings_path(:status => "pending") : bookings_path
     else
       render "bookings/index", status: :unprocessable_entity
     end
