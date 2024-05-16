@@ -60,7 +60,7 @@ Mentor::SPECIALTIES.each do |specialty|
   puts "generated bios for #{specialty}"
 end
 
-def create_user_and_mentor(specialty, input_email = nil, input_name = nil, input_photo_url = nil)
+def create_user_and_mentor(specialty, input_email = nil, input_name = nil, input_photo_url = nil, input_bio = nil)
   name = input_name.nil? ? Faker::Name.unique.name : input_name
   email = input_email.nil? ? Faker::Internet.unique.email : input_email
   user = User.create!(email: email, password: "password", name: name)
@@ -77,7 +77,7 @@ def create_user_and_mentor(specialty, input_email = nil, input_name = nil, input
   file = URI.open(photo_url)
   remaining_bios = BIOS[specialty]
   if remaining_bios.blank?
-    bio = Faker::Lorem.paragraphs(number: 5).join("\n\n")
+    bio = input_bio.nil? ? Faker::Lorem.paragraphs(number: 5).join("\n\n") : input_bio
   else
     bio = remaining_bios.last
     BIOS[specialty] = remaining_bios.reverse.drop(1).reverse
@@ -106,12 +106,12 @@ end
 puts "creating 3 users for our team"
 team_users = [
   { email: "riyaf3105@gmail.com", name: "Riya Fartyal", photo_url: "https://avatars.githubusercontent.com/u/83643548?v=4" },
-  { email: "justin.garcia@gmail.com", name: "Justin Garcia", photo_url: "https://avatars.githubusercontent.com/u/8378384" },
+  { email: "justin.garcia@gmail.com", name: "Justin Garcia", photo_url: "https://avatars.githubusercontent.com/u/8378384", bio: "I'm an iOS developer from Florida. I'd love to help with Core Data, Swift or SwiftUI."},
   { email: "fangshuxing0613@gmail.com", name: "Shuxing Fang", photo_url: "https://avatars.githubusercontent.com/u/151457729?v=4" }
 ]
 standard_user = { email: "standard-user@gmail.com", name: "John Smith" }
 team_users.each do |hash|
-  create_user_and_mentor(Mentor::SPECIALTIES.sample, hash[:email], hash[:name], hash[:photo_url])
+  create_user_and_mentor(Mentor::SPECIALTIES.sample, hash[:email], hash[:name], hash[:photo_url], hash[:bio])
 end
 
 create_user(standard_user[:email], standard_user[:name])

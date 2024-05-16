@@ -1,14 +1,13 @@
-.card-main {
+.card-mentor {
   overflow: hidden;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  border-radius: 2%;
+  border-radius: 8px;
 }
 
-.card-mentor > img {
-  height: 200px;
+.card-mentor img {
   width: 100%;
-  object-fit: cover;
+  transition: all 200ms ease-in;
 }
 
 .card-mentor h2 {
@@ -27,19 +26,17 @@
   grid-gap: 16px;
 }
 
-.card-mentor img {
-  transition: height 0.2s ease-out;
-  height: 45%;
-  position: relative;
-}
-
-.card-mentor {
-  position: relative;
+.card-mentor .image-wrapper {
+  overflow: hidden;
 }
 
 .card-mentor:hover {
-  height: 100%;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(192, 192, 192, 0.7) 100%);
+}
+
+.card-mentor img:hover {
+  transition: all 200ms ease-in;
+  transform: scale(1.05);
 }
 
 .mentors-list {

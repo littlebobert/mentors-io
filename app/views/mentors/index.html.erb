@@ -30,24 +30,21 @@
     <h3 class = "ps-2"> <%= specialty.capitalize %> </h3>
     <ul class="mentors-list">
       <% @mentors.all.each do |mentor| %>
-        <% if mentor.specialty == specialty %>
-          <li class="card-main">
-            <%= link_to mentor_path(mentor) do %>
-              <div class="card-mentor">
-                <%= cl_image_tag(mentor.photo.key) %>
-                <div class="card-mentor-infos">
-                  <h5 class="fs-6"><strong><%= mentor.user.name %></strong></h5>
-                  <p class="h6 small">$<%= mentor.price %> per hour</p>
-                  <p class="h6 small"><%= mentor.tagline %></p>
-                    <div class="card-tags">
-                      <% if Booking.where(user: current_user, mentor: mentor).first.present? %>
-                        <span> <i class="fa-solid fa-calendar-check" style="color: #60c1e1;"></i> </span>
-                      <% end %>
-                    </div>
+        <% next if mentor.specialty != specialty %>
+        <%= link_to mentor_path(mentor) do %>
+          <div class="card-mentor">
+            <div class="image-wrapper"><%= cl_image_tag(mentor.photo.key) %></div>
+            <div class="card-mentor-infos">
+              <h5 class="fs-6"><strong><%= mentor.user.name %></strong></h5>
+              <p class="h6 small">$<%= mentor.price %> per hour</p>
+              <p class="h6 small"><%= mentor.tagline %></p>
+                <div class="card-tags">
+                  <% if Booking.where(user: current_user, mentor: mentor).first.present? %>
+                    <span> <i class="fa-solid fa-calendar-check" style="color: #60c1e1;"></i> </span>
+                  <% end %>
                 </div>
-              </div>
-            <% end %>
-          </li>
+            </div>
+          </div>
         <% end %>
       <% end %>
     </ul>
