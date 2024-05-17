@@ -16,7 +16,7 @@
   </li>
 </ul>
 
-
+<div class="booking-card-container">
   <% (params[:status].nil? ? @bookings : @bookings.where(status: params[:status])).each  do |booking| %>
 
    <div class="booking-card">
@@ -37,3 +37,4 @@
   </div>
 </div>
   <% end %>
+</div>
