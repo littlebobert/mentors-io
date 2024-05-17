@@ -97,7 +97,7 @@ total = Mentor::SPECIALTIES.count * mentors_per_specialty
 puts "creating #{total} fake mentors"
 Mentor::SPECIALTIES.each do |specialty|
   mentors_per_specialty.times do
-    result = create_user_and_mentor(specialty)
+    result = create_user_and_mentor(specialty, nil, nil, "app/assets/images/#{num_created}.jpg", nil)
     num_created += 1
     puts "#{num_created} / #{total}: finished creating a user and mentor for: #{result[:name]}, #{result[:email]}. tagline: #{result[:tagline]}"
   end
