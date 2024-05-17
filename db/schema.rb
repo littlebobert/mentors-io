@@ -46,7 +46,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_17_044422) do
     t.datetime "start_time"
     t.bigint "user_id", null: false
     t.bigint "mentor_id", null: false
-    t.string "status"
+    t.string "status", default: "pending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["mentor_id"], name: "index_bookings_on_mentor_id"
