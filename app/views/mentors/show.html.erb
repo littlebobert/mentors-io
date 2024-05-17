@@ -25,7 +25,7 @@
         </div>
         <div>
           <h3>Reviews:</h3>
-          <ul>
+          <ul class="reviews">
             <% @mentor.reviews.each do |review| %>
               <li><span class="rating"><% review.rating.times do %><i class="fa-solid fa-star"></i><% end %></span>: <%= review.comment %></li>
             <% end %>
