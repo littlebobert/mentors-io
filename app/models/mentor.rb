@@ -4,6 +4,7 @@ class Mentor < ApplicationRecord
 
   belongs_to :user
   has_many :bookings, dependent: :destroy
+  has_many :reviews
   validates :user, presence: true, uniqueness: true
 
   include PgSearch::Model
