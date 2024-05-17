@@ -67,6 +67,7 @@ i:hover {
   margin-bottom:0; /*Fix for safari gap*/
   min-height: 150px;
   max-height: 300px;
+  z-index: -1;
 }
 
 .content {
