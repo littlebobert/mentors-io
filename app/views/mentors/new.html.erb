@@ -1,18 +1,31 @@
-<h1 class="text-center my-4 display-4">Become a mentor</h1>
+<h3 class="text-center my-4 fs-2">Become a mentor</h3>
 
 <%= simple_form_for(@mentor) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
-    <%= f.input :specialty, collection: Mentor::SPECIALTIES %>
-    <%= f.input :price , label: "Price (per hour)"%>
-    <%= f.input :tagline %>
-    <%= f.input :bio %>
-    <%= f.input :photo, as: :file %>
-  </div>
+  <div class="container">
+    <div class="form-inputs row">
+      <div class="col-md-6 mb-3">
+        <%= f.input :specialty, collection: Mentor::SPECIALTIES %>
+      </div>
+      <div class="col-md-6 mb-3">
+        <%= f.input :price, label: "Price (per hour)" %>
+      </div>
+      <div class="col-md-6 mb-3">
+        <%= f.input :tagline %>
+      </div>
+      <div class="col-md-6 mb-3">
+        <%= f.input :photo, as: :file %>
+      </div>
+      <div class="col-md-6 mb-3">
+        <%= f.input :bio, as: :text, :input_html => {:rows => 10}%>
+      </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Apply Now", class:"btn btn-flat" %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Apply Now", class: "btn btn-flat" %>
+    </div>
   </div>
 <% end %>
