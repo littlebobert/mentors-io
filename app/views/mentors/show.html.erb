@@ -25,10 +25,11 @@
         </div>
         <div>
           <h3>Reviews:</h3>
+          <p class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> 4.0</p>
           <ul class="reviews">
-            <% @mentor.reviews.each do |review| %>
-              <li><span class="rating"><% review.rating.times do %><i class="fa-solid fa-star"></i><% end %></span>: <%= review.comment %></li>
-            <% end %>
+            <li>Had a lot of great insights.<span class="rating"> <em>-- Jonathan Cook</em></span></li>
+            <li>Gave me some really good advice.<span class="rating"> <em>-- Bill Hader</em></span></li>
+            <li>Responses to my questions were super direct.<span class="rating"> <em>-- Susan Bolan</em></span></li>
           </ul>
         </div>
       </div>
