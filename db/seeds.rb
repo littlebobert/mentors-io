@@ -50,6 +50,7 @@ puts "clearing the db"
 Booking.destroy_all
 Mentor.destroy_all
 User.destroy_all
+Review.destroy_all
 
 mentors_per_specialty = 8
 
@@ -137,4 +138,17 @@ team_users.each do |team_user_hash|
   end
 end
 
-puts "done. generated #{User.count} users and #{Mentor.count} mentors and #{Booking.count} bookings"
+puts "seeding fake reviews"
+Mentor.all.each do |mentor|
+  3.times do
+    random_user = User.all.sample
+    while random_user == mentor.user
+      random_user = User.all.sample
+    end
+    rating = (1..5).to_a.sample
+    comment = Faker::Lorem.sentence
+    Review.create!(user: random_user, mentor: mentor, rating: rating, comment: comment)
+  end
+end
+
+puts "done. generated #{User.count} users, #{Mentor.count} mentors, #{Booking.count} bookings, and #{Review.count} reviews"
