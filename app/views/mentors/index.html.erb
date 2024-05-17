@@ -33,7 +33,7 @@
         <% next if mentor.specialty != specialty %>
         <%= link_to mentor_path(mentor) do %>
           <div class="card-mentor">
-            <div class="image-wrapper"><%= cl_image_tag(mentor.photo.key) %></div>
+            <div class="image-wrapper"><div class="see-times">See Times</div><%= cl_image_tag(mentor.photo.key) %></div>
             <div class="card-mentor-infos">
               <h5 class="fs-6"><strong><%= mentor.user.name %></strong></h5>
               <p class="h6 small">$<%= mentor.price %> per hour</p>
