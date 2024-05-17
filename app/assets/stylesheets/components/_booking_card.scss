@@ -21,11 +21,15 @@
   color: #999999;
   font-weight: bold;
 }
+
 .booking-card .booking-card-actions {
   display: flex;
   transition: ease .3s;
 }
 
+.booking-card-actions i {
+  color: #543AB7;
+}
 
 .booking-card .booking-card-actions a {
   color: #999999;
