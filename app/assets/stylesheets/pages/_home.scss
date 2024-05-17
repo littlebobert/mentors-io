@@ -1,7 +1,13 @@
 // Specific CSS for your home-page
 .page {
-  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+  // background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
   color:white;
+}
+
+.jumbotron {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  margin-top: 200px;
 }
 
 .btn-ghost {
@@ -36,13 +42,13 @@
   padding: 8px 24px;
   border-radius: 4px;
   font-weight: bold;
-  background: linear-gradient(#167FFB, #0F60C4);
+  // background: linear-gradient(#167FFB, #0F60C4);
   transition: background 0.3s ease;
   border: 1px solid #0F60C4;
 }
 
 .btn-gradient:hover {
-  background: linear-gradient(#147EFF, #0F67DA);
+  // background: linear-gradient(#147EFF, #0F67DA);
   color: white;
 }
 
@@ -55,10 +61,11 @@ i:hover {
 }
 
 .waves {
-  position:relative;
+  position: fixed;
+  bottom: 0;
   width: 100%;
   height:70vh;
-  margin-bottom:-7px; /*Fix for safari gap*/
+  margin-bottom:0; /*Fix for safari gap*/
   min-height: 150px;
   max-height: 300px;
 }
