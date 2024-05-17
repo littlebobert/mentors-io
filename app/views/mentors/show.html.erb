@@ -5,15 +5,15 @@
       <div class="grid-content">
         <div class="block">
             <h2 class = "text-center"><%= @mentor.user.name %></h2>
-            <div class="d-flex justify-content-center"><%= cl_image_tag @mentor.photo.key, width: 200 %></div>
+            <div class="mentor-pic d-flex justify-content-center"><%= cl_image_tag @mentor.photo.key, width: 200 %></div>
             <br> <h4 class = "fs-6"><strong>Specialty:</strong> <%= @mentor.specialty.capitalize %></h4>
             <h4 class = "fs-6"><strong>Bio:</strong> <%= @mentor.bio.split("\n\n").first %></h4>
         </div>
         <div class="block mt-4">
           <p> Book a video call with <%= @mentor.user.name %>! </p>
           <p> 1:1 Video Consultation at $<%= @mentor.price%> per hour </p>
-          What to expect
-          <ul>
+          What to expect: <br>
+          <ul class = "gray-bg">
             <li> Ask five or more questions </li>
             <li> Tips on jumpstarting growth </li>
             <li> Advice on truly learning <%= @mentor.specialty %> </li>
