@@ -20,7 +20,9 @@
     <%= link_to "All", mentors_path, class: "tab-underlined #{params[:specialty].nil? ? "active" : ""}" %>
   </li>
   <% Mentor::SPECIALTIES.each do |specialty| %>
-    <%= link_to specialty.capitalize, mentors_path(:specialty => specialty), class: "tab-underlined #{params[:specialty] == specialty ? "active" : ""}" %>
+    <li>
+      <%= link_to specialty.capitalize, mentors_path(:specialty => specialty), class: "tab-underlined #{params[:specialty] == specialty ? "active" : ""}" %>
+    </li>
   <% end %>
 </ul>
 
