@@ -1,5 +1,8 @@
-<h1 class = "text-center mt-3">Choose an expert</h1>
-<div class="search-form-control form-group">
+<div class = "page">
+<br> <br>
+<h1 class = "text-center"> Choose an expert </h1>
+<br>
+<div class="search-form-control form-group rounded">
   <div class="form-group form-inline">
     <%= form_with url: mentors_path, method: :get, class: "d-flex" do %>
       <%= text_field_tag :query,
@@ -11,6 +14,7 @@
     <% end %>
   </div>
 </div>
+
 <ul class="list-inline tabs-underlined mt-3">
   <li>
     <%= link_to "All", mentors_path, class: "tab-underlined #{params[:specialty].nil? ? "active" : ""}" %>
@@ -21,13 +25,14 @@
 </ul>
 
 
+
 <% if @mentors.empty? %>
   <p class="text-center"> Nothing available </p>
 <% else %>
   <% Mentor::SPECIALTIES.each do |specialty| %>
     <% next if @mentors.where(specialty: specialty).empty? %>
     <% next if specialty != params[:specialty] && params[:specialty]%>
-    <h3 class = "ps-2"> <%= specialty.capitalize %> </h3>
+    <h3 class = "ps-2"> <strong> <%= specialty.capitalize %> </strong> </h3>
     <ul class="mentors-list">
       <% @mentors.all.each do |mentor| %>
         <% next if mentor.specialty != specialty %>
@@ -50,3 +55,4 @@
     </ul>
   <% end %>
 <% end %>
+</div>

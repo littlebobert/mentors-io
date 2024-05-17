@@ -1,4 +1,8 @@
 // Specific CSS for your home-page
+.page {
+  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+  color:white;
+}
 
 .btn-ghost {
   color: #4A4A4A;
@@ -15,10 +19,10 @@
 }
 
 .btn-flat {
-  color: white;
+  color: black;
   padding: 8px 24px;
   border-radius: 4px;
-  background: #000000;
+  background: white;
   transition: background 0.3s ease;
 }
 
@@ -43,9 +47,65 @@
 }
 
 i {
-  color: black;
+  color: white;
 }
 
 i:hover {
   color: #4D04C4;
+}
+
+.waves {
+  position:relative;
+  width: 100%;
+  height:70vh;
+  margin-bottom:-7px; /*Fix for safari gap*/
+  min-height: 150px;
+  max-height: 300px;
+}
+
+.content {
+  position:relative;
+  height:40vh;
+  text-align:center;
+  background-color: white;
+}
+
+/* Animation */
+
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5)     infinite;
+}
+.parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+.parallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+.parallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+.parallax > use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+@keyframes move-forever {
+  0% {
+   transform: translate3d(-90px,0,0);
+  }
+  100% {
+    transform: translate3d(85px,0,0);
+  }
+}
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+  .waves {
+    height:40px;
+    min-height:40px;
+  }
+  .content {
+    height:30vh;
+  }
 }

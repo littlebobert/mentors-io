@@ -1,6 +1,12 @@
+.page {
+  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+  color:white;
+}
+
 .card-mentor {
   overflow: hidden;
   background: white;
+  color:black;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 8px;
   height: 33em;
