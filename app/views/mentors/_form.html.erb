@@ -1,4 +1,4 @@
 <%= simple_form_for [@mentor, @booking] do |f| %>
 <%= f.input :start_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
-<%= f.button :submit, class: "btn btn-primary" %>
+<%= f.button :submit, class: "btn btn-mentor" %>
 <% end %>
