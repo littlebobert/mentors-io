@@ -1,10 +1,14 @@
 .booking-card {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
   background: white;
   padding: 8px 16px;
   border: 1px solid rgb(235,235,235);
+  width: 80%;
+  border-radius: 8px;
+  justify-content: center;
+  margin: 1rem auto;
+  float: none;
 }
 
 .booking-card .booking-card-content {
@@ -21,11 +25,15 @@
   color: #999999;
   font-weight: bold;
 }
+
 .booking-card .booking-card-actions {
   display: flex;
   transition: ease .3s;
 }
 
+.booking-card-actions i {
+  color: #543AB7;
+}
 
 .booking-card .booking-card-actions a {
   color: #999999;

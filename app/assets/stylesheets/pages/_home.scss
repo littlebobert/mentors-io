@@ -32,7 +32,7 @@
 }
 
 .btn-flat:hover {
-  background: #4D04C4;
+  background: #543AB7;
   color: white;
 }
 
@@ -56,7 +56,7 @@ i {
 }
 
 i:hover {
-  color: #4D04C4;
+  color: #543AB7;
 }
 
 .waves {
@@ -67,6 +67,7 @@ i:hover {
   margin-bottom:0; /*Fix for safari gap*/
   min-height: 150px;
   max-height: 300px;
+  z-index: -1;
 }
 
 .content {
